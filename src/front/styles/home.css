@@ -5,3 +5,65 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+/* home.css */
+
+  
+/* home.css */
+
+body {
+    background-color: #1a1a1a; /* Color de fondo oscuro */
+    color: #fff; /* Color de texto para estilos oscuros */
+  }
+  
+  .card {
+    background-color: #333; /* Color de fondo para tarjetas */
+    border: 1px solid #555;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  h1,
+  h3 {
+    color: #fff; /* Color de texto para encabezados */
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .justify-content-center {
+    justify-content: center;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  img {
+    background-color: transparent; /* Fondo transparente para la imagen */
+    border-radius: 50%; /* Border radius circular */
+    overflow: hidden; /* Oculta cualquier contenido que exceda el área circular */
+  }
+  
+  /* Add any additional styles or modifications as needed */
