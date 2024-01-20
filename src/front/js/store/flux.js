@@ -1,3 +1,4 @@
+const API_URL = "https://improved-space-guacamole-5gq5gpp4x9p7hrrp-3001.app.github.dev/api"
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -46,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				};
 				try{
-					const resp = await fetch ('https://improved-space-guacamole-5gq5gpp4x9p7hrrp-3001.app.github.dev/api/token', opts)
+					const resp = await fetch (API_URL + '/token', opts)
 					if(resp.status !== 200) {
 						alert("There has been some error");
 						return false

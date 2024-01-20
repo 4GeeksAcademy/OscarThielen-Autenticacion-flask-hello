@@ -8,7 +8,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from bcrypt import gensalt
-from flask_bcrypt import generate_password_hash
+from flask_bcrypt import generate_password_hash, check_password_hash
 
 api = Blueprint('api', __name__)
 
@@ -19,7 +19,19 @@ api = Blueprint('api', __name__)
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != "test" or password != "test":
+    print(password)
+
+    if not email or not password:
+        return jsonify({"msg": "Bad email or password"}), 401
+
+    # Realizar la verificación de las credenciales con la API externa
+    #response = request.post("https://improved-space-guacamole-5gq5gpp4x9p7hrrp-3001.app.github.dev", json={"email": email, "password": password})
+    user = User.query.filter_by(email= email).first()
+
+    if user is None: 
+        return jsonify({"msg": "User not found"}), 404
+    
+    if not check_password_hash(user.hashed_password, password):
         return jsonify({"msg": "Bad email or password"}), 401
 
     access_token = create_access_token(identity=email)
@@ -39,6 +51,7 @@ def handle_register():
     data = request.json
     email = data.get("email")
     password = data.get("password")
+    print(password)
     # Verificar que nos envien los datos completos
     data = request.json
     if not data or "email" not in data or "password" not in data:
@@ -52,15 +65,15 @@ def handle_register():
         "message": "User already exists"
         }), 400
     # Crear el salt
-    salt = str(gensalt(), encoding='utf-8')
+    #salt = str(gensalt(), encoding='utf-8')
     # Crear el hashed_password -> password + salt
-    hashed_password = str(generate_password_hash(password + salt), encoding='utf-8')
+    hashed_password = generate_password_hash(password).decode("utf-8")
     print(hashed_password)
     # Crear el usuario
     new_user = User(
         email = email,
         hashed_password = hashed_password,
-        salt = salt
+        #salt = salt
     )
     print(new_user)
     # Guardar en db
